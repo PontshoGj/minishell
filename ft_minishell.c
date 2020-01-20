@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "libft/libft.h"
+
+#define  INPUT_STRING 1021
 
 char *pwd()
 {
@@ -17,9 +20,44 @@ void cd(char *s)
     chdir(s);
 }
 
-int main(int ac, char **av) {
-    printf("%s\n", pwd());
-    cd(av[1]);
-    printf("%s\n", pwd());
+
+void process(void){
+    char s[INPUT_STRING] = {0};
+    char *input;
+
+    input = 0;
+
+    ft_putstr("&> ");
+
+    while(1){
+        read(0, s, INPUT_STRING);
+        input = ft_strtrim(s);
+        // printf("%s", s);
+        if (strcmp("pwd" ,input) == 0)
+            printf("%s\n", pwd());
+        else if (strcmp("cd", input) == 0){
+            cd("../../Desktop");
+        }
+
+        // printf("%zu", strlen(s));
+        // printf("%s\n", pwd());
+    //     // cd(av[1]);
+    //     // printf("%s\n", pwd());
+    // free(input);
+        ft_putstr("&> ");
+    //     // exit(1);
+    }
+}
+
+int main(void) {
+    pid_t x;
+    x = fork();
+    if (x)
+    {
+        process();
+    }else{
+        exit(1);
+    }
+    wait(NULL);
     return 0;
 }
