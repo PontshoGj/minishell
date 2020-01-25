@@ -16,7 +16,11 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
 
+# define BUFF_SIZE 32
 typedef	struct	s_list
 {
 	void			*content;
@@ -115,4 +119,6 @@ void			ft_putstrc(char *s, int size);
 void			ft_putstrc_fd(char *s, int fd, int size);
 long long		ft_lenlong_base(long long n, int base);
 char			*ft_longtoa_base(long long i, int base, char h);
+int				get_next_line(int const fd, char **line);
+
 #endif

@@ -36,6 +36,7 @@ ft_str_is_alpha.c ft_strrev.c ft_strlenc.c ft_intlen.c ft_printlst.c \
 ft_str_to_upper.c ft_isspace.c ft_wordlen.c ft_str_to_lower.c ft_atoi_base.c \
 ft_putnbrlong.c ft_putnbrlong_fd.c ft_printhex.c ft_strspn.c ft_itoa_base.c \
 ft_intlen_base.c ft_putstrc_fd.c ft_putstrc.c ft_longtoa_base.c ft_lenlong_base.c \
+get_next_line.c \
 
 OBJ=$(SRC:.c=.o)
 
