@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <unistd.h>
-#include "libft/libft.h"
-
-extern char **environ;
+#include "ft_minishell.h"
 
 int ft_strarrlen(char **arr){
     int i;
@@ -13,7 +9,7 @@ int ft_strarrlen(char **arr){
     return i;
 }
 
-char **realloc_environ(char **environ, char *s){
+char **realloc_environ(char *s){
     int i;
     char **new_environ;
 
@@ -28,13 +24,7 @@ char **realloc_environ(char **environ, char *s){
     return new_environ;
 }
 
-int main(int ac, char **av)
-{
-    int i = 0;
-    char **s;
-
-    environ = realloc_environ(environ, "FOO=bar");
-    execve(av[1], av, NULL);
-
-    return 0;
+void    ft_setenv(char *new_var){
+    if (new_var != 0)
+        environ = realloc_environ(new_var);
 }

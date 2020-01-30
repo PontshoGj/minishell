@@ -19,17 +19,20 @@ void ft_process(void){
             if (ft_strcmp("echo", hold[0]) == 0){
                 ft_putendl(ft_strsub(input, ft_strlenc(input, ' ') + 1, ft_strlen(input)));
             }
+            if (ft_strcmp("setenv", hold[0]) == 0){
+                ft_setenv(hold[1]);
+            }
         }else{
             if (ft_strcmp("pwd", input) == 0){
                 ft_putendl(ft_pwd());
                 // printf("%s\n", pwd());
             }
             if (ft_strcmp("env", input) == 0){
-		        int i = 0;
-		        while (environ[i] != 0)
-			        ft_putendl(environ[i++]);
+		        // int i = 0;
+		        // while (environ[i] != 0)
+			    //     ft_putendl(environ[i++]);
                  //ft_putendl(input);
-                //ft_envir(0);
+                ft_envir();
             }
             if (ft_strcmp("exit", input) == 0){
                 exit(1);

@@ -6,5 +6,6 @@ extern char **environ;
 
 char    *ft_pwd();
 void    ft_cd(char *s);
-void    ft_envir(char **opt);
+void    ft_envir();
+void    ft_setenv();
 #endif
