@@ -1,14 +1,5 @@
 #include "ft_minishell.h"
 
-int ft_strarrlen(char **arr){
-    int i;
-
-    i = 0;
-    while(arr[i] != 0)
-        i++;
-    return i;
-}
-
 char **realloc_environ(char *s){
     int i;
     char **new_environ;
@@ -26,5 +17,6 @@ char **realloc_environ(char *s){
 
 void    ft_setenv(char *new_var){
     if (new_var != 0)
-        environ = realloc_environ(new_var);
+        if (ft_strstr(new_var, "=") != 0 && ft_strlen(new_var) > 1)
+            environ = realloc_environ(new_var);
 }
