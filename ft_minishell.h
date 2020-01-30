@@ -11,5 +11,4 @@ void    ft_setenv();
 void    ft_unsetenv();
 int     ft_strarrlen(char **arr);
 void    ft_echo(char *input);
-
 #endif
