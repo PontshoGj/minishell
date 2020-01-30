@@ -25,9 +25,9 @@ void ft_process(void){
                 // printf("%s\n", pwd());
             }
             if (ft_strcmp("env", input) == 0){
-		int i = 0;
-		while (environ[i] != 0)
-			ft_putendl(environ[i++]);
+		        int i = 0;
+		        while (environ[i] != 0)
+			        ft_putendl(environ[i++]);
                  //ft_putendl(input);
                 //ft_envir(0);
             }
