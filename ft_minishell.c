@@ -17,7 +17,7 @@ void ft_process(void){
                 ft_cd(hold[1]);
             }
             if (ft_strcmp("echo", hold[0]) == 0){
-                ft_putendl(ft_strsub(input, ft_strlenc(input, ' ') + 1, ft_strlen(input)));
+                ft_echo(input);
             }
             if (ft_strcmp("setenv", hold[0]) == 0){
                 ft_setenv(hold[1]);

@@ -8,4 +8,5 @@ char    *ft_pwd();
 void    ft_cd(char *s);
 void    ft_envir();
 void    ft_setenv();
+void    ft_echo(char *input);
 #endif

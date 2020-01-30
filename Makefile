@@ -6,7 +6,7 @@ CFLAGS=-Wall -Wextra -Werror -c -I .
 
 RM=rm -f
 
-SRC=ft_minishell.c ft_cd.c ft_envir.c ft_pwd.c ft_setenv.c\
+SRC=ft_minishell.c ft_cd.c ft_envir.c ft_echo.c ft_pwd.c ft_setenv.c\
 
 OBJ=$(SRC:.c=.o)
 
