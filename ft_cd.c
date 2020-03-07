@@ -8,7 +8,7 @@ void ft_cd(char *s)
         chdir(ft_strsub(environ[23], 5, ft_strlen(environ[23])));
         var[0] = "HOME";
         var[1] = ft_strsub(environ[23], 5, ft_strlen(environ[23]));
-        execve("/bin/setenv", var, NULL);
+        execve("/bin/setenv", var, environ);
     }else{
         chdir(s);
     }
