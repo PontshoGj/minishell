@@ -26,13 +26,17 @@ static int  find_home()
     }
     return (0);
 }
-void        ft_echo(char *input)
+void     ft_echo(char *input)
 {
     char *param;
 
     param = ft_strsub(input, ft_strlenc(input, ' ') + 1, ft_strlen(input));
     if (ft_strcmp(param, "~") == 0)
         ft_putendl(ft_strsub(environ[find_home()], 5, ft_strlen(environ[find_home()])));
+    else if (param[0] == '$')
+    {
+        ft_putendl(ft_envKey(ft_strcat(ft_strsub(param, 1, ft_strlen(param)), "=")));       
+    }
     else
         ft_print_echo(param);
 }

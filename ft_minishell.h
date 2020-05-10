@@ -4,6 +4,7 @@
 # include "libft/libft.h"
 extern char **environ;
 
+char *ft_envKey(char *dirs);
 char    *ft_pwd();
 void    ft_cd(char *s);
 void    ft_envir();
