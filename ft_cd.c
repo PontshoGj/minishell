@@ -14,6 +14,8 @@ void pwd_oldpwd(char *newDir, char *oldDir)
         }
         i++;
     }
+     //free(&newDir);
+    // free(&oldDir);
 }
 
 char *ft_envKey(char *dirs)
@@ -38,7 +40,7 @@ void ft_cd(char *s)
 
     var = ft_pwd();
     if (ft_strcmp("home", s) == 0 || ft_strcmp("~", s) == 0){
-        pwd_oldpwd(ft_envKey("HOME="), ft_pwd());
+        pwd_oldpwd(ft_envKey("HOME="), var);
         chdir(ft_envKey("HOME="));
     }else if (ft_strcmp("-", s) == 0)
     {
