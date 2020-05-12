@@ -17,17 +17,20 @@ void ft_options(char *input){
 void ft_nooptions(char *input){
     char    **av;
     int     i;
+    char *pwds = ft_pwd();
 
     i = 0;
     av = (char **)malloc(sizeof(char *) * 2);
     av[0] = input;
     av[1] = (char *)0;
-    (ft_strcmp("pwd", input) == 0 && i == 0) ? ft_putendl(ft_pwd()): i++;
+    (ft_strcmp("pwd", input) == 0 && i == 0) ? ft_putendl(pwds): i++;
     (ft_strcmp("env", input) == 0 && i == 1) ? ft_envir(): i++;
     (ft_strcmp("exit", input) == 0 && i == 2) ? exit(1): i++;
     (ft_strcmp("cd", input) == 0 && i == 3) ? ft_cd("home"): i++;
     (ft_strlen(input) > 0 && i == 4) ? ft_execute_comand(av) : i++;
     i = 0;
+    free(av);
+    free(pwds);
 }
 
 void ft_process(void){
@@ -37,7 +40,7 @@ void ft_process(void){
         ft_putstr("&> ");
         get_next_line(0, &input);
         (ft_elementcount(input, ' ') > 1) ? ft_options(input) : ft_nooptions(input);
-        // free(input);
+        free(input);
     }
 }
 
