@@ -1,45 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_freearry.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmogwere <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 09:26:50 by pmogwere          #+#    #+#             */
-/*   Updated: 2019/06/15 13:58:53 by pmogwere         ###   ########.fr       */
+/*   Created: 2019/09/14 10:37:47 by pmogwere          #+#    #+#             */
+/*   Updated: 2019/09/14 10:38:47 by pmogwere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-static char	*rmwhitespace(char *str)
+void		ft_freearry(char **s)
 {
-	char	*s;
+	char	**str;
 
-	s = NULL;
-	if (!str)
-		return (NULL);
-	while (*str)
-	{
-		if (ft_iswhitespace(*str) == 1)
-			str++;
-		else
-			return (s = str);
-	}
-	return (str);
-}
-
-char		*ft_strtrim(char const *s)
-{
-	char	*str;
-	char	*str2;
-
-	if (!s)
-		return (NULL);
-	str = rmwhitespace((char *)s);
-	str2 = ft_strrev(str);
-	str = rmwhitespace(str2);
-	str2 = ft_strrev(str);
+	str = s;
+	while (*s)
+		free(*s++);
 	free(str);
-	return (str2);
 }

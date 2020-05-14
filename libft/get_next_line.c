@@ -55,8 +55,11 @@ int					get_next_line(const int fd, char **line)
 		ft_strclr(*line);
 	}
 	free(*line);
-	if (nline(s, line, fd) > 0)
-		return (1);
+	if (nline(s, line, fd) > 0){
+			free(s[fd]);
+			s[fd] = 0;
+			return (1);
+	}
 	if (ret == 0)
 		return (0);
 	return (-1);

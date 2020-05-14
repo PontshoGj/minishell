@@ -13,11 +13,17 @@ void pwd_oldpwd(char *newDir, char *oldDir)
     while(environ[i] != 0){
         envOldPwd = ft_strsub(environ[i], 0, 7);
         envPwd = ft_strsub(environ[i], 0, 4);
-        if (ft_strcmp(/*ft_strsub(environ[i], 0, 7)*/ envOldPwd, "OLDPWD=") == 0){
+        if (ft_strcmp(envOldPwd, "OLDPWD=") == 0){
+            if (ft_chectstore("OLDPWD") == 1)
+                ft_delstore("OLDPWD");
             environ[i] = ft_strjoin("OLDPWD=", oldDir);
+            ft_store("OLDPWD");
         }
-        if (ft_strcmp(/*ft_strsub(environ[i], 0, 4)*/envPwd, "PWD=") == 0){
+        if (ft_strcmp(envPwd, "PWD=") == 0){
+            if (ft_chectstore("PWD") == 1)
+                ft_delstore("PWD");
             environ[i] = ft_strjoin("PWD=", newDir);
+            ft_store("PWD");
         }
         i++;
         free(envOldPwd);
@@ -53,15 +59,15 @@ void ft_cd(char *s)
     envOldPwd = ft_envKey("OLDPWD=");
     var = ft_pwd();
     if (ft_strcmp("home", s) == 0 || ft_strcmp("~", s) == 0){
-        pwd_oldpwd(/*ft_envKey("HOME=")*/envHome, var);
+        pwd_oldpwd(envHome, var);
         envHome = ft_envKey("HOME=");
-        chdir(/*ft_envKey("HOME=")*/ envHome);
+        chdir(envHome);
     }else if (ft_strcmp("-", s) == 0)
     {
-        chdir(/*ft_envKey("OLDPWD=")*/envOldPwd);
+        chdir(envOldPwd);
         pwd_oldpwd(ft_pwd(), var);
     }else if (s[0] == '~' && s[1] == '/'){
-        chdir(ft_strjoin(/*ft_envKey("HOME=")*/envHome,ft_strsub(s, 1, ft_strlen(s))));
+        chdir(ft_strjoin(envHome,ft_strsub(s, 1, ft_strlen(s))));
         pwd_oldpwd(ft_pwd(), var);
     }
     else

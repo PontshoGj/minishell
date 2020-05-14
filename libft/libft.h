@@ -120,5 +120,5 @@ void			ft_putstrc_fd(char *s, int fd, int size);
 long long		ft_lenlong_base(long long n, int base);
 char			*ft_longtoa_base(long long i, int base, char h);
 int				get_next_line(int const fd, char **line);
-
+void			ft_freearry(char **s);
 #endif
