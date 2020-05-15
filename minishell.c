@@ -39,9 +39,10 @@ void ft_options(char *input){
     (ft_strcmp("cd" , hold[0]) == 0 && i == 0) ? ft_cd(hold[1]) : i++;
     (ft_strcmp("echo", hold[0]) == 0 && i == 1) ? ft_echo(command): i++;
     (ft_strcmp("setenv", hold[0]) == 0 && i == 2) ? ft_setenv(hold[1]): i++;
-    (strcmp("unsetenv", hold[0]) == 0 && i == 3) ? ft_unsetenv(hold[1]): i++;
+    (ft_strcmp("unsetenv", hold[0]) == 0 && i == 3) ? ft_unsetenv(hold[1]): i++;
     (ft_strlen(command) > 0 && i == 4) ? ft_execute_comand(hold) : i++;
-    ft_freearry(hold);
+    if (ft_strcmp("setenv", hold[0]) != 0 )
+        ft_freearry(hold);
     free(command);
     ft_cleanup();
 }

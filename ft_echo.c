@@ -39,4 +39,5 @@ void     ft_echo(char *input)
     }
     else
         ft_print_echo(param);
+    free(param);
 }

@@ -43,6 +43,7 @@ char *ft_envKey(char *dirs)
     while(environ[i] != 0){
         if (ft_strstr(environ[i], dirs)){
             envkey = ft_strsub(environ[i], ft_strlen(dirs), ft_strlen(environ[i]));
+            break;
         }
         i++;
     }
