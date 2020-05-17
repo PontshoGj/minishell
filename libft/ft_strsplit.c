@@ -12,16 +12,18 @@
 
 #include "libft.h"
 
-static char	*placestring(char *str, size_t i)
-{
-	char	*s;
+// static char	*placestring(char *str, size_t i)
+// {
+// 	char	*s;
+// 	// char	*temp;
 
-	if (!(s = (char *)malloc(sizeof(char) * i + 1)))
-		return (NULL);
-	s = ft_strncpy(s, str, i);
-	s[i] = '\0';
-	return (s);
-}
+// 	if (!(s = (char *)malloc(sizeof(char) * i + 1)))
+// 		return (NULL);
+// 	s = ft_strncpy(s, str, i);
+// 	s[i] = '\0';
+// 	// free(temp);
+// 	return (s);
+// }
 
 char		**ft_strsplit(char const *s, char c)
 {
@@ -39,7 +41,8 @@ char		**ft_strsplit(char const *s, char c)
 		if (*s != c)
 		{
 			i = ft_strlenc((char *)s, c);
-			*strarry++ = placestring((char *)s, i);
+			// *strarry++ = placestring((char *)s, i);
+			*strarry++ = ft_strsub((char *)s, 0, i);
 			s = s + i;
 		}
 		else

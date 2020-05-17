@@ -33,13 +33,18 @@ char		*ft_strtrim(char const *s)
 {
 	char	*str;
 	char	*str2;
+	char	*temp;
 
 	if (!s)
 		return (NULL);
-	str = rmwhitespace((char *)s);
+	temp = ft_strdup((char *)s);
+	str = rmwhitespace(temp);
 	str2 = ft_strrev(str);
-	str = rmwhitespace(str2);
+	free(temp);
+	temp = ft_strdup(str2);
+	free(str2);
+	str = rmwhitespace(temp);
 	str2 = ft_strrev(str);
-	free(str);
+	free(temp);
 	return (str2);
 }

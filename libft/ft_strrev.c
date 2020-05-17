@@ -21,7 +21,7 @@ char		*ft_strrev(char *str)
 	if (!str)
 		return (NULL);
 	i = ft_strlen(str);
-	if (!(s = (char *)malloc(sizeof(char) * i + 1)))
+	if (!(s = (char *)ft_memalloc(i + 1)))
 		return (NULL);
 	c = s;
 	i--;

@@ -2,74 +2,52 @@
 
 void pwd_oldpwd(char *newDir, char *oldDir)
 {
-    int i;
-    char *envOldPwd;
-    char *envPwd;
+    char    *temp;
     
-    envOldPwd = 0;
-    envPwd = 0;
-    i = 0;
-    
-    while(environ[i] != 0){
-        envOldPwd = ft_strsub(environ[i], 0, 7);
-        envPwd = ft_strsub(environ[i], 0, 4);
-        if (ft_strcmp(envOldPwd, "OLDPWD=") == 0){
-            if (ft_chectstore("OLDPWD") == 1)
-                ft_delstore("OLDPWD");
-            environ[i] = ft_strjoin("OLDPWD=", oldDir);
-            ft_store("OLDPWD");
-        }
-        if (ft_strcmp(envPwd, "PWD=") == 0){
-            if (ft_chectstore("PWD") == 1)
-                ft_delstore("PWD");
-            environ[i] = ft_strjoin("PWD=", newDir);
-            ft_store("PWD");
-        }
-        i++;
-        free(envOldPwd);
-        free(envPwd);
-    }
-     free(newDir);
-     free(oldDir);
+    ft_unsetenv("OLDPWD");
+    temp = ft_strjoin("OLDPWD=", oldDir);
+    ft_setenv(temp);
+    free(temp);
+    temp = 0;
+
+    ft_unsetenv("PWD");
+    temp = ft_strjoin("PWD=", newDir);
+    ft_setenv(temp);
+    free(temp);
 }
 
-char *ft_envKey(char *dirs)
-{
-    char *envkey;
-    int i;
-
-    i = 0;
-    envkey = 0;
-    while(environ[i] != 0){
-        if (ft_strstr(environ[i], dirs)){
-            envkey = ft_strsub(environ[i], ft_strlen(dirs), ft_strlen(environ[i]));
-            break;
-        }
-        i++;
-    }
-    return envkey;
-}
 
 void ft_cd(char *s)
 {
     char *var;
     char *envHome;
     char *envOldPwd;
+    char *temp;
+    char    *temp2;
     
+    temp = 0;
+    temp2 = 0;
     envHome = ft_envKey("HOME=");
     envOldPwd = ft_envKey("OLDPWD=");
     var = ft_pwd();
     if (ft_strcmp("home", s) == 0 || ft_strcmp("~", s) == 0){
         pwd_oldpwd(envHome, var);
-        envHome = ft_envKey("HOME=");
         chdir(envHome);
     }else if (ft_strcmp("-", s) == 0)
     {
         chdir(envOldPwd);
-        pwd_oldpwd(ft_pwd(), var);
+        temp = ft_pwd();
+        pwd_oldpwd(temp, var);
+        free(temp);
     }else if (s[0] == '~' && s[1] == '/'){
-        chdir(ft_strjoin(envHome,ft_strsub(s, 1, ft_strlen(s))));
-        pwd_oldpwd(ft_pwd(), var);
+        temp2 = ft_strsub(s, 1, ft_strlen(s));
+        temp = ft_strjoin(envHome,temp2);
+        free(temp2);
+        chdir(temp);
+        free(temp);
+        temp  = ft_pwd();
+        pwd_oldpwd(temp, var);
+        free(temp);
     }
     else
     {
@@ -79,9 +57,12 @@ void ft_cd(char *s)
             ft_putstr(s);
             ft_putendl(" : No such file or directory");
         }else{
-            pwd_oldpwd(ft_pwd(), var);
+            temp = ft_pwd();
+            pwd_oldpwd(temp, var);
+            free(temp);
         }
     }
+    free(var);
     free(envOldPwd);
     free(envHome);
 }

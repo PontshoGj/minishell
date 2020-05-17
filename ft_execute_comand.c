@@ -3,52 +3,26 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-char *which(char *cmd, char *path)
-{
-    int i;
-    char **paths;
-    char *fullpath;
-    struct stat file_info;
-    char *tmp;
-
-    if (lstat(cmd, &file_info) == 0)
-        return (ft_strdup(cmd));
-    i = 0;
-    paths = ft_strsplit(path, ':');
-   
-    while(paths[i] != NULL){
-        tmp = ft_strjoin(paths[i], "/");
-        fullpath = ft_strjoin(tmp, cmd);
-        free(tmp);
-        if (lstat(fullpath, &file_info) == 0)
-            break ;
-        ft_strdel(&fullpath);
-        i++;
-    }
-    ft_freearry(paths);
-    return fullpath;
-}
 
 void ft_execute_comand(char **av)
 {
-    char *envk;
-    char *fullpath;
+    char    *temp;
 
-    envk = 0;
+    temp = 0;                                                  
     if (fork() == 0){
-        envk = ft_envKey("PATH=");
-        fullpath = which(av[0], envk);
-        free(envk);
-      
-        if  (fullpath != NULL)
-            execve(fullpath, av, environ);
-        else
-        {
-        ft_putstr("minishell: command not found: ");
-        ft_putendl(av[0]);
-        }
-        free(fullpath);
-        exit(0);
-    }
-    wait(0);
+            if ((ft_strstr(av[0], "/bin/") != 0 || ft_strstr(av[0], "/") != 0) && av){
+                temp = ft_strjoin("minishell: no such file or directory: ", av[0]);
+                execve(av[0], av, environ) < 1 ? ft_putendl(temp) : (void)0;
+            }else if(ft_envKeys("PATH=")){
+                temp = ft_strjoin("minishell: command not found: ", av[0]);                                                     
+                av[0] = ft_strjoin("/bin/", av[0]);                             
+                execve(av[0], av, environ) < 1 ? ft_putendl(temp) : (void)0;
+            }else{
+                temp =ft_strjoin("minishell: no such file or directory: ", av[0]);                                                          
+                ft_putendl(temp);
+            }
+        free(temp);
+        exit(0);                                                                
+    }                                                                           
+    wait(0);  
 }
