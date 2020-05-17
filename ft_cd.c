@@ -10,19 +10,19 @@ void pwd_oldpwd(char *newDir, char *oldDir)
     envPwd = 0;
     i = 0;
     
-    while(environ[i] != 0){
-        envOldPwd = ft_strsub(environ[i], 0, 7);
-        envPwd = ft_strsub(environ[i], 0, 4);
+    while(environment[i] != 0){
+        envOldPwd = ft_strsub(environment[i], 0, 7);
+        envPwd = ft_strsub(environment[i], 0, 4);
         if (ft_strcmp(envOldPwd, "OLDPWD=") == 0){
             if (ft_chectstore("OLDPWD") == 1)
                 ft_delstore("OLDPWD");
-            environ[i] = ft_strjoin("OLDPWD=", oldDir);
+            environment[i] = ft_strjoin("OLDPWD=", oldDir);
             ft_store("OLDPWD");
         }
         if (ft_strcmp(envPwd, "PWD=") == 0){
             if (ft_chectstore("PWD") == 1)
                 ft_delstore("PWD");
-            environ[i] = ft_strjoin("PWD=", newDir);
+            environment[i] = ft_strjoin("PWD=", newDir);
             ft_store("PWD");
         }
         i++;
@@ -40,9 +40,9 @@ char *ft_envKey(char *dirs)
 
     i = 0;
     envkey = 0;
-    while(environ[i] != 0){
-        if (ft_strstr(environ[i], dirs)){
-            envkey = ft_strsub(environ[i], ft_strlen(dirs), ft_strlen(environ[i]));
+    while(environment[i] != 0){
+        if (ft_strstr(environment[i], dirs) == environment[i]){
+            envkey = ft_strsub(environment[i], ft_strlen(dirs), ft_strlen(environment[i]));
             break;
         }
         i++;
@@ -55,6 +55,8 @@ void ft_cd(char *s)
     char *var;
     char *envHome;
     char *envOldPwd;
+    char *chd;
+    char *sub;
     
     envHome = ft_envKey("HOME=");
     envOldPwd = ft_envKey("OLDPWD=");
@@ -68,7 +70,11 @@ void ft_cd(char *s)
         chdir(envOldPwd);
         pwd_oldpwd(ft_pwd(), var);
     }else if (s[0] == '~' && s[1] == '/'){
-        chdir(ft_strjoin(envHome,ft_strsub(s, 1, ft_strlen(s))));
+        sub = ft_strsub(s, 1, ft_strlen(s));
+        chd = ft_strjoin(envHome, sub);
+        free(sub);
+        chdir(chd);
+        free(chd);
         pwd_oldpwd(ft_pwd(), var);
     }
     else

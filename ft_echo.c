@@ -19,8 +19,8 @@ static int  find_home()
     int i;
 
     i = 0;
-    while(environ[i] != 0){
-        if (ft_strcmp("HOME", ft_strsub(environ[i], 0, ft_strlenc(environ[i], '='))) == 0)
+    while(environment[i] != 0){
+        if (ft_strcmp("HOME", ft_strsub(environment[i], 0, ft_strlenc(environment[i], '='))) == 0)
             return i;
         i++;
     }
@@ -32,7 +32,7 @@ void     ft_echo(char *input)
 
     param = ft_strsub(input, ft_strlenc(input, ' ') + 1, ft_strlen(input));
     if (ft_strcmp(param, "~") == 0)
-        ft_putendl(ft_strsub(environ[find_home()], 5, ft_strlen(environ[find_home()])));
+        ft_putendl(ft_strsub(environment[find_home()], 5, ft_strlen(environment[find_home()])));
     else if (param[0] == '$')
     {
         ft_putendl(ft_envKey(ft_strcat(ft_strsub(param, 1, ft_strlen(param)), "=")));       

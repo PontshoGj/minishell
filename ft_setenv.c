@@ -1,24 +1,24 @@
 #include "ft_minishell.h"
 
-char **realloc_environ(char *s){
+char **realloc_environment(char *s){
     int i;
-    char **new_environ;
+    char **new_environment;
 
     i = 0;
-    new_environ = (char **)malloc(sizeof(char *) * (ft_strarrlen(environ) + 1));
-    new_environ[ft_strarrlen(environ)] = 0;
-    while(environ[i] != 0){
-        new_environ[i] = environ[i];
+    new_environment = (char **)malloc(sizeof(char *) * (ft_strarrlen(environment) + 2));
+    while(environment[i] != 0){
+        new_environment[i] = ft_strdup(environment[i]);
         i++;
     }
-    new_environ[i] = s;
-    return new_environ;
+    new_environment[i] = s;
+    new_environment[i + 1] = NULL;
+    ft_freearry(environment);
+    return new_environment;
 }
 
 void    ft_setenv(char *new_var){
-    // if (new_var = 0)
+    if (new_var != 0)
         if (ft_strstr(new_var, "=") != 0 && ft_strlen(new_var) > 1)
-            environ = realloc_environ(new_var);
-       
-    free(environ);
+            environment = realloc_environment(new_var);
+
 }
