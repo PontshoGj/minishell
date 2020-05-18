@@ -17,7 +17,7 @@ void    ft_setenv(char *new_var);
 void    ft_unsetenv(char *var);
 int     ft_strarrlen(char **arr);
 void    ft_echo(char *input);
-void    ft_execute_comand(char **av);
+void    ft_execute_comand(char **av, char **command);
 void    ft_sighandler();
 char    *ft_tabTospace(char *s);
 #endif

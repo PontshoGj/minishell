@@ -10,11 +10,14 @@ void        realloc_environ(char *s){
         new_environ[i] = ft_strdup(environ[i]);
         i++;
     }
+    if (ft_envKeys(s))
+        ft_unsetenv(s);
     new_environ[i] = ft_strdup(s);
     i++;
     new_environ[i] = 0;
-    if (store != 0)
+    if (store != 0){
         ft_freearry(store);
+    }
     store = new_environ;
     environ = new_environ;
 }
