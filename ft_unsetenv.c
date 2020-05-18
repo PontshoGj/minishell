@@ -25,6 +25,13 @@ void        realloc_environ_one(char *s){
 }
 
 void ft_unsetenv(char *var){
-   if (ft_envKeys())
+    char *temp;
+    char  *temp2;
+
+    temp = ft_strjoin(var, "=");
+    temp2 = ft_envKey(temp);
+   if (ft_envKeys() && temp2 != 0)
         realloc_environ_one(var);
+    free(temp);
+    free(temp2);
 }
