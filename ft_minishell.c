@@ -48,7 +48,6 @@ void        ft_nooptions(char **input){
         free(&av[0]);
         free(pwds);   
         free(command);
-        // free(*input);
         if (store != 0)
             ft_freearry(store);
         exit(1);
@@ -72,7 +71,6 @@ void        ft_process(void){
         ft_putstr("&> ");
         get_next_line(0, &input);
         (ft_elementcount(input, ' ') > 1) ? ft_options(&input) : ft_nooptions(&input);
-        // free(input);
     }
 }
 
