@@ -11,7 +11,8 @@ ft_execute_comand.c ft_envKey.c ft_sighandler.c ft_tabTospace.c\
 
 OBJ=$(SRC:.c=.o)
 
-$(NAME): 
+$(NAME):
+	cd libft && make re && make clean && cd ..
 	$(CC) $(CFLAGS) $(SRC) 
 	ar rc $(NAME) $(OBJ)
 	$(CC) -o ft_minishell ft_minishell.c ft_minishell.a libft/libft.a 
