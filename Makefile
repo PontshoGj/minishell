@@ -2,7 +2,7 @@ NAME=ft_minishell.a
 
 CC=gcc
 
-CFLAGS=-Wall -Wextra -Werror -c -I .
+CFLAGS=-Wall -Wextra -Werror -c -I.
 
 RM=rm -f
 
@@ -12,9 +12,9 @@ ft_execute_comand.c ft_envKey.c ft_sighandler.c ft_tabTospace.c\
 OBJ=$(SRC:.c=.o)
 
 $(NAME): 
-	$(CC) $(CFLAGS) $(SRC)
+	$(CC) $(CFLAGS) $(SRC) 
 	ar rc $(NAME) $(OBJ)
-	$(CC) ft_minishell.c ft_minishell.a libft/libft.a 
+	$(CC) -o ft_minishell ft_minishell.c ft_minishell.a libft/libft.a 
 	$(RM) $(OBJ) *.o
 all: $(NAME)
 
